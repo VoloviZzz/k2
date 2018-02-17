@@ -1,0 +1,55 @@
+<%- include("header") -%>
+
+<h1><%=title%></h1>
+
+<p>На этой странице размещены отзывы о нашей компании, которые оставляют наши клиенты. Если Вы хотите оставить нам отзыв - пожалуйста введите Ваше имя и текст отзыва в форму ниже и нажмите кнопку "Добавить отзыв".</p>
+<div class="row">
+	<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ea">
+		<div class="form-group" id="new-review-form">
+			<div class="alert alert-danger hidden" id="new-review-name-error"></div>
+			<input type="text" class="form-control" placeholder="Ваше имя" id="new-review-name" />
+			<div class="alert alert-danger hidden" id="new-review-text-error"></div>
+			<textarea class="form-control" placeholder="Ваш отзыв" id="new-review-text"></textarea>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+		<br />
+		<button class="btn btn-success" id="add-new-review"><span class="fa fa-pencil-square-o"></span> Добавить отзыв</button>
+	</div>
+</div>
+<h2>Отзывы клиентов</h2>
+<ul id="reviews"><%
+	
+	if (reviews.length > 0){
+		reviews.forEach(r => {
+			
+			%><li><%
+				
+				if(admin){
+					
+					%><button class="btn btn-danger delete-review-button" data-id="<%=r.id%>"><span class="fa fa-trash"></span> Удалить отзыв</button><%
+					%><button class="btn btn-success"><input type="checkbox" class="edit-review-public" data-id="<%=r.id%>" style="width:.9em; height:.9em;" title="Публиковать позицию"<% if (r.public == 1) { %> checked<% } %> /> Публиковать</button><%
+				
+				}
+			
+				%><h3><%=r.name%></h3>
+				<h4><%=r.created%></h4>
+				<p><%=r.text%></p>
+			</li><%
+		});
+	}
+	else{
+		%><div class="alert alert-info">Отзывы отсутствуют</div><%
+	}
+	
+%></ul>
+
+<%- include("footer") -%><%
+	
+%><script src="/public/javascripts/reviews.js"></script><%
+	
+	if(admin){
+		%><script src="/public/javascripts/reviews_admin.js"></script><%
+	}
+	
+%>

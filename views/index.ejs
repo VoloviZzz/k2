@@ -1,0 +1,129 @@
+<%- include("header") -%><%
+
+%><h1>Добро пожаловать на сайт компании <%=Config.name%></h1><%
+
+if (slides) {
+
+	%><div id="carousel" class="carousel slide" data-ride="carousel"><%
+		%><ol class="carousel-indicators"><%
+			
+			console.log(slides)
+			
+			var active = false;
+			
+			slides.forEach((item, i) => {
+			
+				%><li data-target="#carousel" data-slide-to="<%=i%>"<%
+					
+					if (!active) {
+						%> class="active"<%
+						active = true;
+					}
+					
+				%>></li><%			
+			
+			});
+			
+			if (admin) {
+				%><button class="btn btn-xs btn-success" id="create-new-slide"><span class="fa fa-plus"></span> Добавить слайд</button><%
+				%><input type="file" id="carousel-upload-images" name="upload-images[]" style="display:none;" /><%
+			}
+			
+			
+		%></ol><%
+		%><div class="carousel-inner"><%
+			
+			var active = false;
+			
+			slides.forEach((item, i) => {
+	
+				%><div class="item<% 
+					
+					if (!active) {
+						%> active<%
+						active = true;
+					}
+					
+				%>"><%
+					%><img src="<%
+						
+						if (item.img){
+							%>/public/images/slides/<%=item.img%><%
+						}
+						else {
+							%>/public/images/slides/no_slide.jpg<%
+						}
+						
+					%>" /><%
+					%><div class="carousel-caption"><%
+	
+						if (!admin) {
+							%><h2><%=item.title%></h2><%
+							%><h3><%=item.subtitle%></h3><%
+							%><p><%=item.text%></p><%
+						}
+						else {
+							%><div><%
+								
+								%><input type="checkbox" class="carousel-edit-public" data-slide="<%=item.id%>"<%
+									if (item.public == 1) { %> checked<% }
+								%> /> Публиковать<%
+								
+								%> &nbsp; &nbsp; | &nbsp; &nbsp; <%
+								
+								%><span class="fa fa-bars" title="Приоритет"></span> &nbsp; <%
+								%><input type="number" class="carousel-edit-priority" data-slide="<%=item.id%>" value="<%=item.priority%>" /><%
+								
+								%> &nbsp; &nbsp; | &nbsp; &nbsp; <%
+								
+								%><button class="btn btn-danger carousel-delete-slide" data-slide="<%=item.id%>" title="Удалить слайд"><span class="fa fa-trash"></span></button><%
+	
+								%> &nbsp; &nbsp; | &nbsp; &nbsp; <%
+								
+								%><button class="btn btn-primary carousel-upload-image" data-slide="<%=item.id%>" title="Загрузить изображение"><span class="fa fa-upload"></span></button><%
+								
+							%></div><%
+							%><h2><%
+								%><input type="text" class="carousel-edit-title" data-slide="<%=item.id%>" value="<%=item.title%>" /><%
+							%></h2><%
+							%><h3><%
+								%><input type="text" class="carousel-edit-subtitle" data-slide="<%=item.id%>" value="<%=item.subtitle%>" /><%
+							%></h3><%
+							%><p><%
+								%><input type="text" class="carousel-edit-text" data-slide="<%=item.id%>" value="<%=item.text%>" /><%
+							%></p><%
+						}
+						
+					%></div><%
+				%></div><%
+				
+			});
+			
+		%></div><%
+		
+		%><a class="left carousel-control" href="#carousel" data-slide="prev"><%
+			%><span class="glyphicon glyphicon-chevron-left"></span><%
+		%></a><%
+		%><a class="right carousel-control" href="#carousel" data-slide="next"><%
+			%><span class="glyphicon glyphicon-chevron-right"></span><%
+		%></a><%
+	%></div><%
+	
+}
+
+if (!admin) {
+	%><div id="main-text"><%-Config.mainText !== null ? Config.mainText : "Описание отсутствует"%></div><%
+}
+else {
+	%><br /><%
+	%><div id="edit-main-text" contenteditable="true" style="height:30em;"><%-Config.mainText%></div><%
+	%><br /><%
+}
+
+%><%- include("footer") -%><%
+	
+	if (admin) {
+		%><script src="/public/javascripts/index_admin.js"></script><%
+	}
+	
+%>

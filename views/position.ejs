@@ -1,0 +1,118 @@
+<%- include("header") -%>
+
+<h1 id="page-title"><%
+
+	if(!admin){
+		%><%=pos.name%><%
+	}
+	else{
+		%><input type="text" id="edit-pos-name" value="<%=pos.name%>" /><%
+	}
+
+%></h1>
+
+<div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6"><%
+		
+		%><div class="img<% if(typeof mainPhoto.id == "undefined"){ %> img-repeat img-auto<% } %>" id="main-photo" <%
+			%>src="<%
+				if(mainPhoto){
+					%><%=mainPhoto.fullPath%><%
+				}
+				else if(photos){
+					%>/public/images/no_main.png<%
+				}
+				else{
+					%>/public/images/no_photo.png<%
+				}
+			%>"></div><%
+		
+		if (admin) {
+					
+			%><button class="btn btn-danger hidden" id="delete-selected-images-button"><span class="fa fa-trash" title="Удалить выбранные"></span></button><%
+			%><button class="btn btn-warning<% if(!photos){ %> hidden<% } %>" id="select-all-images-button"><span class="fa fa-toggle-on" title="Отметить все"></span></button><%
+			%><button class="btn btn-primary" id="upload-images-button" title="Добавить изображения"><span class="fa fa-plus"></span></button><%
+			%><input type="number" id="position-id" value="<%=pos.id%>" style="display:none;" /><%
+			%><input type="file" multiple="true" id="upload-images" name="upload-images[]" style="display:none;" /><%
+		
+		}
+
+		%><div class="row" id="photos-list"><%
+		
+			if(photos){
+				photos.forEach(photo => {
+				
+					%><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="photo-<%=photo.id%>"><%
+					
+						if (admin) {
+
+							%><div class="btn btn-xs btn-default" data-id="<%=photo.id%>"><span class="fa fa-toggle-off check-photo"></span></div><%
+							%><button class="btn btn-danger btn-xs delete-photo" data-id="<%=photo.id%>" title="Удалить фото"><span class="fa fa-trash"></span></button><%
+							
+							if(photo.id !== pos.mainphoto){
+								%><button class="btn btn-success btn-xs set-main-photo" data-id="<%=photo.id%>" title="Главное"><span class="fa fa-arrow-up"></span></button><%
+							}
+							
+						}
+						
+						%><div class="img photo pointer" src="<%=photo.fullPath%>"></div><%
+						
+					%></div><%
+				
+				});
+			}
+			
+		%></div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="btn-toolbar" id="pos-btn-toolbar">
+			<div id="pos-price"><%
+				
+				if(admin){
+					%>Цена <input id="edit-pos-price" type="number" value="<%=pos.price%>" /> руб./сут.<%
+					%><br /><%
+					%>Сумма залога <input id="edit-bail-sum" type="number" value="<%=pos.bail_sum%>" /> руб.<%
+					%><br /><%
+					%><input type="checkbox" id="flag-pos-public"<% if(pos.public == 1){ %> checked<% } %> /> Публиковать позицию<%
+				}
+				else{
+					if(pos.price > 0){
+						%><%=pos.price%> руб./сут.<%
+						
+						if(pos.bail_sum > 0){
+							%><br />Сумма залога: <%=pos.bail_sum%> руб.<%
+						}
+						
+					}
+					else{
+						%>Цена по запросу<%
+					}
+				}
+				
+			%></div><%
+			
+			if(!admin){
+				%><div class="btn btn-success btn-lg"><span class="fa fa-cart-plus"></span> Заказать</div><%
+			}
+			
+		%></div><%
+		
+		if(admin){
+			%><textarea id="edit-pos-description" placeholder="Описание позиции"><%=pos.description%></textarea><%
+		}
+		else{
+			%><p><%-pos.description !== null ? Helpers.replaceLineBreaks(pos.description, "</p><p>") : "Описание отсутствует"%></p><%
+		}
+		
+	%></div>
+</div>
+<br />
+<%- include("footer") -%><%
+
+%><script src="/public/javascripts/position.js"></script><%
+
+if(admin){
+	%><script src="/public/javascripts/position_admin.js"></script><%
+}
+
+%>

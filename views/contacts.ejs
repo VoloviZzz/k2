@@ -1,0 +1,75 @@
+<%- include("header") -%>
+
+<h1><%=title%></h1>
+<p>Наш телефон</p><%
+
+if (!admin) {
+	%><h2>+7 (<%=Config.phone_region_code%>) <%=Config.phone_number%></h2><%
+}
+else {
+	%><input type="number" id="contacts-phone-code" value="<%=Config.phone_region_code%>" /> &nbsp; <input type="text" id="contacts-phone-number" value="<%=Config.phone_number%>" /><%
+}
+%><p>E-mail</p><%
+
+if (!admin) {
+	%><h2><%=Config.email%></h2><%
+}
+else {
+	%><input type="text" id="contacts-email" value="<%=Config.email%>" /><%
+}
+
+
+%><p>Номер банковской карты для внесения предоплаты</p><%
+
+if (!admin) {
+	%><h2><%=Config.card_number%></h2><%
+}
+else {
+	%><input type="text" id="contacts-card-number" value="<%=Config.card_number%>" /><%
+}
+
+%><p>Мы находимся по адресу</p><%
+
+if (!admin) {
+	%><h2><%=Config.contacts_address%></h2><%
+}
+else {
+	%><input type="text" id="contacts-address" value="<%=Config.contacts_address%>" /><%
+}
+%><p>На карте</p><%
+%><div id="map"></div><%
+%><script src="http://api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript"></script><%
+%><script>
+	var myMap;
+	function showMap(coord1,coord2) {
+		// Создание экземпляра карты и его привязка к контейнеру с
+		// заданным id ("map").
+		myMap = new ymaps.Map('map', {
+			// При инициализации карты обязательно нужно указать
+			// её центр и коэффициент масштабирования.
+			center:[coord1, coord2], // Москва
+			zoom:15
+		});
+		myMap.controls
+		// Кнопка изменения масштаба.
+		.add('zoomControl', { left: 5, top: 5 })
+		// Список типов карты
+		.add('typeSelector');
+		myMap.balloon.open([coord1, coord2], "Прокат инструмента", {
+		// Опция: показываем кнопку закрытия.
+		closeButton: true
+		});
+	}
+	function init(){
+		ymaps.ready(function(){showMap(53.380,59.095);});
+	}
+	document.addEventListener('DOMContentLoaded',init,false);
+</script><%
+
+%><%- include("footer") -%><%
+
+if(admin){
+	%><script src="/public/javascripts/contacts_admin.js"></script><%
+}
+
+%>

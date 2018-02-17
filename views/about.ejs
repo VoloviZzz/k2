@@ -1,0 +1,18 @@
+<%- include("header") -%><%
+
+%><h1><%=title%></h1><%
+
+if(admin){
+	%><div id="edit-about" contenteditable="true" style="height:30em;"><%-Config.about%></div><%
+}
+else{
+	%><%-Config.about !== null ? Config.about : "Описание отсутствует"%><%
+}
+
+%><%- include("footer") -%><%
+
+if(admin){
+	%><script src="/public/javascripts/about_admin.js"></script><%
+}
+
+%>

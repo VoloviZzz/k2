@@ -1,0 +1,18 @@
+<%- include("header") -%>
+
+<h1><%=title%></h1><%
+
+if(admin){
+	%><div id="edit-rates" contenteditable="true" style="height:30em;"><%-Config.rates%></div><%
+}
+else{
+	%><%-Config.rates !== null ? Config.rates : "Тарифы не заданы"%><%
+}
+
+%><%- include("footer") -%><%
+
+if(admin){
+	%><script src="/public/javascripts/rates_admin.js"></script><%
+}
+
+%>

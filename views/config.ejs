@@ -1,0 +1,212 @@
+<%- include("header") -%><%
+
+%><h1 id="page-title"><%=title%></h1><%
+
+%><div id="scroller-layout"></div><%
+%><div class="container" id="scroller"><%
+	%><div class="row"><%
+	
+		%><div class="col-lg-12 col-md-12" id="scroller-top"><%			
+			%><div class="btn-toolbar" id="config-toolbar"><%
+				%><button class="btn btn-success" id="route-add-button"><span class="fa fa-plus"></span> Добавить новый маршрут</button><%
+			%></div><%
+		%></div><%
+	
+		%><div class="col-lg-3 col-md-3" id="scroller-left-wrapper"><%
+			%><div id="scroller-left"><%
+				%><ul id="routes-buttons"><%
+					
+					routes.forEach(route => {
+						
+						%><li class="route-button" data-route="<%=route.id%>"><%
+							%><b><%=route.name%></b><%
+							%><%=route.title%><%
+						%></li><%
+						
+					});
+				
+				%></ul><%
+			%></div><%
+		%></div><%
+		
+		%><div class="col-lg-9 col-md-9" id="scroller-content-wrapper"><%
+			%><div id="scroller-content"><%
+				%><div id="no-selected-route" class="va"><div><%
+					%><h2>Не выбран маршрут для редактирования</h2><%
+					%><h3>Выберите маршрут для редактирования в списке слева или создайте новый маршрут</h3><%
+				%></div></div><%
+				
+				%><ul id="routes"><%
+					
+					routes.forEach((route, i, routes) => {
+						
+						%><li class="route hidden" id="route-<%=route.id%>"><%
+							%><table><%
+								%><tr><%
+									%><th>Имя маршрута</th><%
+									%><td><input type="text" value="<%=route.name%>" /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Заголовок</th><%
+									%><td><input type="text" value="<%=route.title%>" /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Является алиасом</th><%
+									%><td><%
+										%><select><%
+											%><option value="">не является</option><%
+											
+											routes.forEach(route => {
+												if (route.aliasfor == null) {
+													%><option value="<%=route.id%>"><%=route.name%></option><%
+												}
+											});
+											
+										%></select><%
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Путь</th><%
+									%><td><input type="text" value="<%=route.path%>" /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Имя контроллера</th><%
+									%><td><input type="text" value="<%=route.ctrl%>" /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Публичный доступ</th><%
+									%><td><input type="checkbox"<% if (route.public == 1) { %> checked<% } %> /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Консультирование на маршруте</th><%
+									%><td><input type="checkbox"<% if (route.consult == 1) { %> checked<% } %> /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Административный маршрут</th><%
+									%><td><input type="checkbox"<% if (route.admin == 1) { %> checked<% } %> /></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Директивное обращение</th><%
+									%><td><input type="checkbox"<% if (route.direct == 1) { %> checked<% } %> /></td><%
+								%></tr><%
+								%><tr><%
+									%><th colspan="2">Файлы маршрута</th><%
+								%></tr><%
+								%><tr><%
+									%><th>Основной контроллер</th><%
+									%><td>routes/<%=route.name%>.js <%
+										
+										if (route.ctrlExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Основной шаблон</th><%
+									%><td><%
+										%>views/<%=route.name%>.ejs <%
+										
+										if (route.viewExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Клиентский скрипт</th><%
+									%><td><%
+										%>/public/javascripts/<%=route.name%>.js <%
+										
+										if (route.clientJsExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Административный скрипт</th><%
+									%><td><%
+										%>/public/javascripts/<%=route.name%>_admin.js <%
+										
+										if (route.adminJsExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Клиентская таблица стилей</th><%
+									%><td><%
+										%>/public/javascripts/<%=route.name%>_admin.js <%
+										
+										if (route.clientCssExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+								%><tr><%
+									%><th>Административная таблица стилей</th><%
+									%><td><%
+										%>/public/javascripts/<b><%=route.name%>_admin.js</b> <%
+										
+										if (route.adminCssExists) {
+											%><kbd>присутствует</kbd> <%
+											%><button class="btn btn-warning btn-sm">Сбросить</button><%
+										}
+										else {
+											%><code>отсутствует</code> <%
+											%><button class="btn btn-primary btn-sm">Создать</button><%
+										}
+										
+									%></td><%
+								%></tr><%
+							%></table><%
+							
+							%><div><%
+							
+								/* for (var i in route) {
+									%><%=i%> : <%=route[i]%><br /><%
+								} */
+							
+							%></div><%
+							
+						%></li><%
+						
+					});
+					
+				%></ul><%
+			%></div><%
+		%></div><%
+	%></div><%
+%></div><%
+
+%><%- include("footer") -%><%
+
+%><script src="/public/javascripts/config_admin.js"></script>

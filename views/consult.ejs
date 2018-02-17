@@ -1,0 +1,128 @@
+<%- include("header") -%>
+
+<h1 id="page-title"><%=title%></h1><%
+
+%><div class="container" id="cons-content"><%
+	%><div class="row"><%
+	
+		%><div class="col-lg-3 col-md-3" id="cons-left"><%
+			%><ul id="cons-rooms-list"><%
+			
+				for (var i in visits){
+					
+					%><li id="cons-visit-<%=i%>" data-visit="<%=i%>" data-room="<%=visits[i].roomId%>"><%
+						
+						%>Аноним <%=visits[i].roomId%><%
+						
+						if (visits[i].id == visitId) {
+							%> (<b>Вы</b>) <%
+						}
+						
+						%><span class="fa fa-link hidden room-move-icon" id="room-move-icon-<%=visits[i].roomId%>"></span> <%
+						%><span class="fa fa-clock-o hidden room-expect-icon" id="room-expect-icon-<%=visits[i].roomId%>"></span> <%
+						%><span class="fa fa-envelope-o hidden room-mess-icon" id="room-mess-icon-<%=visits[i].roomId%>"></span> <%
+						
+					%></li><%
+					
+				}
+			
+			%></ul><%
+		%></div><%
+	
+		%><div class="col-lg-9 col-md-9" id="cons-right"><%
+			
+			%><div id="cons-rooms-container" class="container-fluid"><%
+			
+				for (var i in visits) {
+				
+				
+					%><div class="room-cont container-fluid hidden" id="room-cont-<%=i%>"><%
+					
+						%><div class="row room-head" id="room-head-<%=i%>"><%
+						
+							%><div id="room-title-<%=i%>" class="col-lg-2 col-md-2 room-title">Визит #<%=i%></div><%
+							
+							%><div class="col-lg-10 col-md-10"><%						
+								%><div class="room-tabs-container"><%
+									%><ul class="nav nav-tabs room-tabs" id="room-tabs-<%=i%>"><%
+									
+										for (var j in views) {
+
+											if (views[j] == null || views[j].visitId !== visits[i].id) continue;
+											
+											%><li id="room-tab-<%=views[j].id%>"><%
+												%><a href="javascript:void(0);"><%=views[j].title%></a><%
+											%></li><%
+											
+										}
+									
+									%></ul><%	
+								%></div><%	
+							%></div><%
+							
+						%></div><%
+						%><div class="row room-mess" id="room-mess-<%=i%>"><%
+							
+							%><div class="col-lg-12 col-md-12 room-mess-container"><%
+								%><ul class="room-mess-list" id="messages-<%=visits[i].roomId%>"><%
+								
+									var messagesCount = 0;
+									
+									for (var j in messages) {
+										
+										if (messages[j].roomId !== visits[i].roomId) continue;
+										
+										%><li <% if (messages[j].senderType == 0) { %> class="answer"<% } %>><%
+											%><div><%
+												%><b><%=messages[j].senderType%> <%=messages[j].senderId%> <%=messages[j].created%></b><%
+												%><span><%=messages[j].text%></span><%
+											%></div><%
+										%></li><%
+										
+										messagesCount++;
+										
+									}
+									
+									if (messagesCount == 0) {
+										%><div class="no-messages">Сообщения отсутствуют</div><%
+									}
+								
+								%></ul><%
+							%></div><%
+							
+						%></div><%
+					
+					%></div><%
+					
+				
+				}
+				
+				%><div id="no-selected-visit">Выберите визит для просмотра</div><%
+			
+			%></div><%
+			
+			%><div class="row" id="cons-message-form"><%
+				%><div class="col-lg-9 col-md-9"><%
+					
+					%><textarea id="cons-new-message"></textarea><%
+					
+				%></div><%
+				%><div class="col-lg-3 col-md-3"><%
+					
+					%><button class="btn btn-success" id="cons-new-message-send">Отправить</button><%
+					
+				%></div><%
+			%></div><%
+			
+		%></div><%
+	
+	%></div><%
+%></div><%
+
+%><audio id="audio-create-tab" src="/public/audios/create_tab.mp3"></audio><%
+%><audio id="audio-close-tab" src="/public/audios/close_tab.mp3"></audio><%
+%><audio id="audio-create-message" src="/public/audios/create_message.mp3"></audio><%
+
+%><%- include("footer") -%><%
+
+%><script src="/public/javascripts/consult_admin.js"></script>

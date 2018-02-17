@@ -1,0 +1,140 @@
+<%- include("header") -%><%
+
+%><style>
+	
+	#login{width:50%; margin:0 auto; font-size:1.5em; padding:2em 0;}
+	#login .row div{text-align:right; padding:.75em; padding-right:1em;}
+	#login .row div:first-child{text-align:right; padding-right:1em;}
+	#login .row div:last-child{text-align:left;}
+	
+	#login .btn{width:50%; margin:1em auto; padding:.75em;}
+	#login input{text-align:center;}
+	
+	#login-deadline{color:blue; font-size:1.25em; transition:font-size .2s;}
+	
+</style><%
+
+%><h1><%=title%></h1><%
+
+%><div id="login"><%
+	
+	%><div class="alert alert-info" id="login-deadline-container">
+		Данная форма будет активна ещё
+		<div id="login-deadline">60</div>
+		секунд
+	</div><%
+	
+	%><div class="container-fluid"><%
+		%><div class="row"><%
+			%><div class="col-lg-4 col-sm-4">Логин</div><%
+			%><div class="col-lg-8 col-sm-8"><%
+				%><input type="text" id="login-login" placeholder="Логин" /><%
+			%></div><%
+		%></div><%
+	%></div><%
+	
+	%><div class="container-fluid"><%
+		%><div class="row"><%
+			%><div class="col-lg-4 col-sm-4">Пароль</div><%
+			%><div class="col-lg-8 col-sm-8"><%
+				%><input type="password" id="login-pass" placeholder="Пароль" /><%
+			%></div><%
+		%></div><%
+	%></div><%
+	
+	%><button class="btn btn-lg btn-success" id="login-button"><span class="fa fa-sign-in"></span> Войти</button><%
+	
+%></div><%
+
+%><%- include("footer") -%><%
+
+%><script>
+	
+	var Login = {
+		
+		login : () => {
+			
+			var login = $('#login-login').val(),
+				pass = $('#login-pass').val();
+				
+			$.post(
+				'',
+				{ctrl : 'login', login : login, pass : pass},
+				data => {
+					if (data == 'complete') {
+						document.location.href = '/';
+					}
+					else alert(data);
+				}
+			);
+			
+		},
+		
+		decrementDeadlineInterval : false,
+		
+		decrementDeadline : () => {
+			
+			var target = $('#login-deadline'),
+				deadline = Number(target.text());
+				
+			deadline--;
+			
+			target.text(deadline);
+			
+			if (deadline < Login.noteDeadlineExpiresTime) Login.noteDeadlineExpires();
+			
+			if (deadline == 0) Login.deadlineExpires();
+			
+		},
+		
+		noteDeadlineExpiresTime : 30,
+		
+		noteDeadlineExpires : () => {
+		
+			if (!$('#login-deadline-container').hasClass('alert-info')) return;
+			
+			$('#login-deadline-container')
+				.addClass('alert-danger')
+				.removeClass('alert-info');
+				
+			$('#login-deadline').css({color : 'red'});
+			
+			setTimeout(() => {
+				$('#login-deadline').css({'font-size' : '1.5em'});
+			}, 500);
+			setTimeout(() => {
+				$('#login-deadline').css({'font-size' : '1.75em'});
+			}, 1000);
+			setTimeout(() => {
+				$('#login-deadline').css({'font-size' : '2em'});
+			}, 1500);
+			
+		},
+		
+		deadlineExpires : () => {
+			
+			clearInterval(Login.decrementDeadlineInterval);
+			
+			$('#login-deadline-container').text('Время активности страницы истекло');
+			
+			setTimeout(() => { window.close(); }, 3000);
+			
+		},
+		
+		init : () => {
+			
+			$('#login-login')[0].focus();
+			$('#login-button').on('click', Login.login);
+			$('#login input').on('keydown', () => {
+				if (event.keyCode == 13) Login.login();
+			});
+			
+			Login.decrementDeadlineInterval = setInterval(Login.decrementDeadline, 1000);
+			
+		}
+		
+	};
+	
+	$(document).ready(Login.init);
+	
+</script>

@@ -1,0 +1,65 @@
+<%- include("header") -%>
+
+<h1><%=title%></h1>
+<%
+	if(admin){
+		%><div class="btn-toolbar">
+			<button id="add-pos-button" class="btn btn-success"><span class="fa fa-plus"></span> Добавить позицию</button>
+		</div><%
+	}
+	
+%><ul class="row catalog"><%
+	
+	positions.forEach(pos => {
+	
+		%><li class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><%
+			%><div class="item"><%
+				
+				if(pos.photo_id !== null){
+					%><a href="/position/<%=pos.id%><% if(admin){ %>/admin<% } %>" class="img" src="/public/photos/<%=pos.path%>/<%=pos.photo_id%>.<%=pos.ext%>"></a><%
+				}
+				else{
+					%><a href="/position/<%=pos.id%><% if(admin){ %>/admin<% } %>" class="img img-repeat img-auto" src="/public/images/no_main.png"></a><%
+				}
+			
+				%><h3><%=pos.name%></h3><%
+				%><p><%=pos.description !== null ? Helpers.trimStr(pos.description, 50) : "Описание отсутствует"%></p><%
+				
+				%><div class="btn-toolbar"><%
+
+					if(admin){
+						%><button class="btn btn-danger delete-pos-button" data-pos="<%=pos.id%>"><span class="fa fa-trash"></span> Удалить</button><%
+					}
+
+					%><a href="/position/<%=pos.id%><% if(admin){ %>/admin<% } %>" class="btn btn-info"><span class="fa fa-info"></span> Подробнее</a><%
+				%></div><%
+				
+				%><div class="price"><%
+					
+					if(pos.price > 0){
+						%><%=pos.price%> руб./сут.<%
+						
+						if(pos.bail_sum > 0){
+							%><br />Залог: <%=pos.bail_sum%> руб.<%
+						}
+						
+					}
+					else{
+						%>Цена по запросу<%
+					}
+					
+				%></div><%
+				
+			%></div><%
+		%></li><%
+	
+	});
+	
+%></ul><%
+%><%- include("footer") -%><%
+
+if(admin){
+	%><script src="/public/javascripts/catalog_admin.js"></script><%
+}
+
+%>

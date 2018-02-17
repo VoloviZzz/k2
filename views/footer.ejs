@@ -1,0 +1,142 @@
+	</div><%
+	%></main><%
+	
+	if (userId) {
+		
+		%><div id="in-wrapper"><%
+			%><div id="in-container"><%
+				%><div id="in"><%
+				
+					%><div id="in-content-wrapper"><%
+						%><div id="in-content-container"><%
+							%><div id="in-content"><%
+								
+								%><div><%
+									%><div class="container-fluid"><%
+										%><div class="row"><%
+											%><div class="in-caption col-lg-4">Логин</div><%
+											%><div class="in-input col-lg-8"><%
+												%><input type="text" placeholder="Логин" /><%
+											%></div><%
+										%></div><%
+									%></div><%
+								%></div><%
+								
+								%><div><%
+									%><div class="container-fluid"><%
+										%><div class="row"><%
+											%><div class="in-caption col-lg-4">Пароль</div><%
+											%><div class="in-input col-lg-8"><%
+												%><input type="password" placeholder="Пароль" /><%
+											%></div><%
+										%></div><%
+									%></div><%
+								%></div><%
+								
+								%><div class="btn btn-lg btn-success"><span class="fa fa-sign-in"></span> Войти</div><%
+								
+							%></div><%
+						%></div><%
+					%></div><%
+					
+				%></div><%
+			%></div><%
+		%></div><%
+		
+	}
+	
+	%><footer id="footer" class="container-fluid navbar-inverse"><%
+		%><div class="row"><%
+			%><div id="description" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><%
+				%><div class="row-fluid"><%
+				%><div id="description-logo" class="col-lg-3 col-md-3 col-sm-2 col-xs-2"><%
+					%><div class="img" src="/public/images/logo.png"></div><%
+				%></div><%
+				
+				%><div id="description-text" class="col-lg-9 col-md-9 col-sm-10 col-xs-10"><%
+				
+					if(!admin){
+						%><p><%-Helpers.replaceLineBreaks(Config.bottom_description, "</p><p>")%></p><%
+					}
+					else{
+						%><textarea id="edit-company-bottom-description"><%=Config.bottom_description%></textarea><%
+					}
+			
+				%></div><%
+				%></div><%
+				
+			%></div><%
+			
+			%><div id="links" class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><%
+				%><h5>Мы в социальных медиа</h5><%
+				%><div id="links-social"><%
+					%><span class="fa fa-vk fa-2x"></span><%
+					%><span class="fa fa-odnoklassniki fa-2x"></span><%
+					%><span class="fa fa-google-plus fa-2x"></span><%
+					%><span class="fa fa-facebook fa-2x"></span><%
+					%><span class="fa fa-youtube fa-2x"></span><%
+				%></div>
+				<h5>Счетчики и рейтинги</h5>
+				<div id="links-counter">
+					<!--LiveInternet counter--><script type="text/javascript"><!--
+					document.write("<a href='//www.liveinternet.ru/click' "+
+					"target=_blank><img src='//counter.yadro.ru/hit?t14.1;r"+
+					escape(document.referrer)+((typeof(screen)=="undefined")?"":
+					";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+					screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+					";"+Math.random()+
+					"' alt='' title='LiveInternet: показано число просмотров за 24"+
+					" часа, посетителей за 24 часа и за сегодня' "+
+					"border='0' width='88' height='31'><\/a>")
+					//--></script><!--/LiveInternet-->
+				</div>
+			</div>
+			<div id="contacts-bottom" class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<div class="number">
+					<span class="fa fa-phone">
+					</span> 
+					<b>+7</b> 
+					<b>(<%=Config.phone_region_code%>)</b>
+					<b><%=Config.phone_number%></b>
+				</div>
+				<div>г. Магнитогорск</div>
+				<div><span class="fa fa-map-marker"></span> ул. Первая 1/1</div>
+				<div><span class="fa fa-clock-o"></span> 8:00 - 20:00</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="copyright" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				&copy; <%=Config.name%> <%=Config.year_founded%> - 2016. Все права защищены.
+			</div>
+			<div id="vendor" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				Дизайн и программирование - <a href="http://letaindex.ru" target="_blank">Лаборатория ΛетаIndex</a>
+			</div>
+		</div>
+	</footer><%
+	
+	%><script src="/public/vendors/jquery/dist/jquery.js"></script><%
+	%><script src="/public/vendors/jquery.cookie/jquery.cookie.js"></script><%
+	%><script src="/public/vendors/bootstrap/dist/js/bootstrap.js"></script><%
+	%><script src="/public/javascripts/config.js"></script><%
+	%><script>Config.WSToken = '<%=viewId%>';</script><%
+	%><script src="/public/javascripts/main.js"></script><%
+	%><script src="/public/javascripts/ws.js"></script><%
+	
+	if (userId) {
+	
+		%><script src="/public/javascripts/user.js"></script><%
+	
+		if(admin){
+			%><script src="/public/vendors/tinymce/tinymce.js"></script><%
+			%><script src="/public/javascripts/admin.js"></script><%
+		}
+
+	}
+	else{
+		if (consult) {
+			%><script src="/public/javascripts/consult.js"></script><%
+		}
+	}
+	
+  %></body>
+</html>

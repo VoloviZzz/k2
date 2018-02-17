@@ -1,0 +1,34 @@
+/* *{outline:1px dashed red;}
+ */
+ 
+ html{height:100%; max-width:100%; overflow-x:hidden;}
+ body{height:100%; width:100%; font-size:16px; text-align:center;}
+ header{}
+ main{min-height:100%; max-width:100%;}
+ footer{}
+
+ul{list-style-type:none; padding:0;}
+
+p{text-align:left; text-indent:1.54em;}
+ 
+.progress{width:100%; margin:0; height:1em;}
+ 
+.img{background-size:contain; background-repeat:no-repeat; background-position:center center; display:block;}
+.img-cover{background-size:cover;}
+.img-auto{background-size:auto;}
+.img-repeat{background-repeat:repeat;}
+.img-repeat-x{background-repeat:repeat-x;}
+.img-repeat-y{background-repeat:repeat-y;}
+
+.pointer{cursor:pointer;}
+
+
+/*  */
+.number > b:nth-child(2){font-size:.85em;}
+.number > b:nth-child(4){font-size:1.5em; font-weight:bold;}
+
+/* конструкция для выравнивания по высоте */
+.va{width:100%; height:100%; display:table;}
+	.va>div{display:table-cell; vertical-align:middle;}
+	
+

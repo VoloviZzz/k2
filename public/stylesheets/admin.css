@@ -1,0 +1,103 @@
+/* carousel */
+.carousel-caption h2, .carousel-caption h3 {margin:0;}
+.carousel-caption h2 input, .carousel-caption h3 input, .carousel-caption p input {color:#000000; text-align:center; margin:0;}
+.carousel-caption div{white-space:nowrap; font-size:1.5em; background:#FFFFFF; color:#000000; display:table; margin:.25em auto; padding:.25em;}
+.carousel-caption div input{width:1em; height:1em; display:inline-block; vertical-align:top;}
+.carousel-caption h2 input{width:90%;}
+.carousel-caption h3 input{width:100%;}
+.carousel-caption p {margin-top:0;}
+.carousel-caption p input{width:100%;}
+
+.carousel-edit-priority {width:2em !important; height:auto !important; text-align:center;}
+
+#create-new-slide {display:inline-block; vertical-align:top; margin-top:.5em;}
+
+/* static */
+#edit-company-name{font-size:2em; display:block; width:100%; margin-top:.5em;}
+#edit-company-slogan{font-size:1.5em; display:block; width:100%; text-align:center; margin:.25em 0;}
+
+.number > input{border-radius:.25em; text-align:center;}
+.number > input:nth-child(3){width:4em; font-size:1.25em;}
+.number > input:nth-child(4){width:7em; font-size:1.5em;}
+
+/* position */
+#edit-pos-name{width:90%; margin:0 auto; text-align:center; border-radius:.25em;}
+
+#edit-pos-price{width:5em; text-align:center; border-radius:.25em;}
+#flag-pos-public{width:1.25em; height:1.25em;}
+
+#edit-pos-description{width:100%; min-height:25em; border-radius:.5em; text-indent:.5em;}
+
+/* consult */
+#cons-content{position:fixed;}
+#cons-content.top{top:0;}
+#cons-content.bottom{bottom:0;}
+	#cons-content > .row {position:relative; height:100%;}
+	#cons-content > .row > div {}
+	
+	#cons-left{background:#EAEAEA; height:100%;}
+	
+	#cons-rooms-list {height:100%; padding:.25em;}
+		#cons-rooms-list li {margin:.25em; outline:1px solid grey; cursor:pointer;}
+		#cons-rooms-list li.active {background:grey; color:white;}
+
+	
+	#cons-right{position:relative; height:100%;}
+	#cons-rooms-container {}
+	.room-cont {}
+		
+		.room-head{border-bottom:1px solid silver;}
+			.room-title {white-space:nowrap; overflow:hidden; line-height:2.5;}
+			
+			.room-tabs-container {padding-left:.5em; padding-top:.5em; background:#EAEAEA; border-radius:.5em .5em 0 0; overflow:hidden;}
+				.room-tabs {text-align:left; white-space:nowrap;}
+				.room-tabs.empty {line-height:2.5; text-align:center;}
+					.room-tabs li {display:inline-block; float:none; border:1px solid silver; border-radius:.5em .5em 0 0; border-bottom:none; padding:0; border-right:none; background:#FFFFFF;}
+					.room-tabs li:last-child {border-right:1px solid silver;}
+						.room-tabs li a {margin:0; border-radius:.5em .5em 0 0; line-height:1;}
+						.room-tabs li.active a {background:grey; color:white !important;}
+		
+		.room-mess{}		
+			.room-mess-container {height:100%; position:relative; overflow:hidden;}
+				.room-mess-list {position:absolute; left:0; bottom:0; width:100%; margin:0;}
+					.room-mess-list li {text-align:right; margin:.5em;}
+					.room-mess-list li.answer {text-align:left;}
+						.room-mess-list li div {display:inline-block; min-width:55%; max-width:90%; border-radius:.25em; border:1px solid grey;}
+							.room-mess-list li div b {display:block; font-size:.65em; background:grey; color:white;}
+							.room-mess-list li div span {display:block; padding:.25em;}
+		
+#cons-message-form {background:#EAEAEA; position:absolute; bottom:0; left:15px; width:100%; border-left:1px solid #FFFFFF;}
+	#cons-new-message, #cons-new-message-send {width:100%; height:3em;}
+	#cons-new-message {margin-top:.75em; margin-bottom:.5em; border-radius:.25em;}
+	#cons-new-message-send {margin-top:1em;}
+	
+/* config */
+#routes-buttons {background:#EAEAEA; padding:.125em 0;}
+	#routes-buttons li {outline:1px solid grey; text-align:left; margin:.25em; padding:.25em; cursor:pointer;}
+	#routes-buttons li:hover, #routes-buttons li.active {background:grey; color:white;}
+		#routes-buttons li b {display:block; font-size:.75em; padding-right:1em;}
+
+#no-selected-route {color:grey;}
+
+#routes {}
+	#routes li {}
+		#routes li table {margin:0 auto;}
+			#routes li table th, #routes li table td {padding:.25em;}
+			#routes li table th {text-align:right;}
+			#routes li table th[colspan="2"] {text-align:center;}
+			#routes li table td {text-align:left;}
+				#routes li table td input {text-align:center;}
+				#routes li table td input[type=checkbox] {width:1.5em; height:1.5em; margin-left:1em;}
+				#routes li table td select {height:2em;}
+					#routes li table td select option {text-align:center;}
+					
+.btn-toolbar{outline:1px dashed red;}
+
+#scroller-layout {width:90%; height:20em; background:red;}
+#scroller {position:fixed; outline:3px dashed blue;}
+	#scroller-content-wrapper, #scroller-left-wrapper, #scroller-right-wrapper {overflow:hidden;}
+	#scroller-top {outline:3px dotted blue;}
+	#scroller-left-wrapper {outline:3px dotted red; position:relative;}
+		#scroller-left {width:100%; position:absolute; left:0; outline:1px dotted aqua;}
+	#scroller-content-wrapper {outline:3px dashed orange;}
+		#scroller-content {}
