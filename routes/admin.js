@@ -26,6 +26,29 @@ module.exports = {
 					});
 			
 			break;
+			case 'saveBanner':
+			
+				Model
+					.checkRequired(data, ['text', 'link'])
+					.then(() => {
+						Model
+							.config.set({
+								bannerText : data.text,
+								bannerLink : data.link,
+							});
+					})
+					.then(result => {
+						return Model.config.getConfig();
+					})
+					.then((result) => {
+						Config = result;
+						res.send('complete');
+					})
+					.catch(error => {
+						res.send(error.toString());
+					});
+			
+			break;
 			case 'save_slogan':
 				
 				Model

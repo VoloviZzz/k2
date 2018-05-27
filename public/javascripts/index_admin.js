@@ -230,3 +230,55 @@ function saveMainText(){
 		}
 	);
 }
+
+function Banner (elem) {
+	this.body = $(elem);
+	this.text = this.body.find('.n-info-inp-text');
+	this.link = this.body.find('.n-info-inp-link');
+	this.file = this.body.find('.banner-image');
+	
+	this.text.on('blur', this.saveText.bind(this));
+	this.link.on('blur', this.saveText.bind(this));
+	this.file.on('change', this.saveImage);
+}
+Banner.prototype.saveText = function () {
+	$.post(
+		'',
+		{ctrl : 'saveBanner', text : this.text.val(), link : this.link.val(),},
+		data => {
+			console.log(data);
+			if (data !== "complete") alert(data);
+		}
+	);
+}
+Banner.prototype.saveImage = function () {
+		
+	var file = this.files[0],
+		data = new FormData();
+	
+	console.log('upload banner image')
+	// return;
+	
+	data.append('file', file)
+	
+	$.ajax({
+		url : '/banner_upload/',
+		data : data,
+		cache : false,
+		contentType : false,
+		processData : false,
+		type : 'POST',
+		// при получении ответа от сервера
+		success : res => {
+			console.log(res);
+			if(res.status == 'ok'){
+				location.reload();
+			}
+			else{
+				console.log(res);
+			}
+		}
+	});
+		
+}
+var banner = new Banner($('.n-info'));

@@ -120,6 +120,55 @@ else {
 	%><br /><%
 }
 
+%><%//=JSON.stringify(Config)%><%
+
+if (Config.banner_view > 0) {
+	%><style>
+		.n-info-wrapper {
+			width: 1140px;
+			border: 1px solid #000;
+			margin-top: 1em;
+			margin-bottom: 1em;
+			border-radius: .5em;
+		}
+		.n-info-img img {
+			float: right;
+			max-width: 96%;
+			border-radius: .5em 0 0 .5em;
+		}
+		.n-info-text {
+			font-size: 2em;
+			text-align: left;
+		}
+		.n-info-text textarea, .n-info-text input{
+			width: 100%;
+			font-size: .8em;
+		}
+	</style>
+	<div class="container n-info-wrapper">
+		<<%=!admin ? "a" : "div"%> class="row n-info" <% if (!admin) { %> href="<%=Config.banner_link%>" target="_blank"<% } %>>
+			<div class="col-md-6 n-info-img">
+				<img src="/public/images/<%=Config.banner_image%>" />
+			</div>
+			<div class="col-md-6 n-info-text"><%
+			
+				if (!admin) {
+					%><%=Config.banner_text%><%
+				}
+				else {
+					%><textarea class="n-info-inp-text"><%=Config.banner_text%></textarea><%
+					%><br /><%
+					%><input type="text" class="n-info-inp-link" value="<%=Config.banner_link%>" /><%
+					%><br /><%
+					%><button class="btn btn-info" onclick="$('.banner-image').click();"><span class="fa fa-upload"></span> Загрузить изображение</button>
+					<input type="file" class="banner-image" name="banner-image" style="display:none;" /><%
+				}
+				
+			%></div>
+		</<%=!admin ? "a" : "div"%>>
+	</div><%
+}
+
 %><%- include("footer") -%><%
 	
 	if (admin) {

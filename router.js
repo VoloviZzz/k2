@@ -440,7 +440,7 @@ module.exports = {
 				Log.view('Идентифицирован посетитель ' + ('#' + req.session.id).grey);
 				
 				// если маршруты не загрузочные - должен быть указан контроллер
-				if (route !== 'position_upload' && route !== 'logo_upload' && route !== 'slide_upload'){
+				if (route !== 'position_upload' && route !== 'logo_upload' && route !== 'slide_upload' && route !== 'banner_upload'){
 					
 					Log.view('Тип запроса - обычный. Проверка указания контроллера');
 
