@@ -1,7 +1,7 @@
 module.exports = {
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'reviews'.grey)
+		// Log.view('Обработка GET-запроса контроллером ' + 'reviews'.grey)
 		
 		data.title = 'Отзывы';
 		
@@ -21,7 +21,7 @@ module.exports = {
 	
 	post:(req, res, next, data) => {
 		
-		Log.view('Обработка POST-запроса контроллером ' + 'reviews'.grey)
+		// Log.view('Обработка POST-запроса контроллером ' + 'reviews'.grey)
 		switch (data.ctrl) {
 			
 			case 'add_review':
@@ -87,6 +87,6 @@ module.exports = {
 	},
 	
 	ws : (ws, data) => {
-		Log.view('Обработка Websocket-запроса контроллером ' + 'reviews'.grey)
+		// Log.view('Обработка Websocket-запроса контроллером ' + 'reviews'.grey)
 	}
 };

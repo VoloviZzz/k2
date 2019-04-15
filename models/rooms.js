@@ -6,7 +6,7 @@ module.exports = {
 	// добавление визита
 	add : (arg) => {
 		
-		Log.view('Обращение к модели rooms.add');
+		// Log.view('Обращение к модели rooms.add');
 		
 		return new Promise((resolve, reject) => {
 		
@@ -21,7 +21,7 @@ module.exports = {
 						visitorId = ${arg.visitorId}
 				`;
 				
-				Log.data(q);
+				// Log.data(q);
 			
 				return Model.executeQuery(q);
 			})

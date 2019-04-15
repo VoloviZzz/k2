@@ -37,7 +37,7 @@ module.exports = {
 	
 	get : arg => {
 		
-		Log.view('Обращение к модели ' + 'reviews.get'.grey);
+		// Log.view('Обращение к модели ' + 'reviews.get'.grey);
 		
 		return new Promise ((resolve, reject) => {
 			

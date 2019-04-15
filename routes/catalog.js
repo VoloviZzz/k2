@@ -1,7 +1,7 @@
 module.exports = {
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'catalog'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'catalog'.grey);
 		
 		// console.log(data);
 		
@@ -17,7 +17,7 @@ module.exports = {
 			})
 			.then(() => {	// рендеринг страницы
 				
-				Log.view('Рендеринг вида ' + 'catalog'.grey);
+				// Log.view('Рендеринг вида ' + 'catalog'.grey);
 				
 				res.render('catalog', data);
 				
@@ -45,7 +45,7 @@ module.exports = {
 			break;
 			case 'delete_pos':
 				
-				Log.view('Обработка запроса удаления позиции');
+				// Log.view('Обработка запроса удаления позиции');
 				
 				Model
 					.checkRequired(data, ['pos'])

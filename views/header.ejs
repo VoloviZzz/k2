@@ -4,7 +4,7 @@
 		%><title><%=title%></title><%
 
 		%><link rel="SHORTCUT ICON" href="/public/favicon.ico" type="image/x-icon" /><%
-		
+
 		%><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><%
 
 		%><link rel="stylesheet" href="/public/vendors/bootstrap/dist/css/bootstrap.css" /><%
@@ -18,22 +18,22 @@
 		}
 
 	%></head><%
-  
+
 	%><body id="body"><%
 		%><header id="header"><%
-		
+
 			%><div id="header-layout"></div><%
-			
+
 			%><div class="container" id="header-container"><%
 				%><div class="row"><%
 					%><div id="logo" class="col col-lg-2 col-md-2 col-sm-2 col-xs-3"><%
 						%><div class="img" src="/public/images/<%=Config.logo%>"></div><%
-						
+
 						if(admin){
 							%><input type="file" id="upload-company-logo" style="display:none;" /><%
 							%><button class="btn btn-success" id="load-logo-button"><span class="fa fa-upload"></span></button><%
 						}
-						
+
 					%></div>
 					<div id="company" class="col col-lg-6 col-md-6 col-sm-10 col-xs-9"><%
 
@@ -45,18 +45,18 @@
 							%><div id="company-name"><%=Config.name%></div><%
 							%><div id="company-tagline"><%=Config.slogan%></div><%
 						}
-						
+
 					%></div>
 					<div id="contacts-top" class="col col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-6 col-xs-8"><%
-									
+
 									if(admin){ %><br /><% }
-									
+
 									%><div id="contacts-phone" class="number">
-										<span class="fa fa-phone"></span> 
+										<span class="fa fa-phone"></span>
 										<b>+7</b> <%
-										
+
 										if(!admin){
 											%><b>(<%=Config.phone_region_code%>)</b><%
 											%><b><%=Config.phone_number%></b><%
@@ -65,31 +65,32 @@
 											%>(<input type="number" id="edit-company-region-code" value="<%=Config.phone_region_code%>" />)<%
 											%><input type="text" id="edit-company-phone-number" value="<%=Config.phone_number%>" /><%
 										}
-										
+
 									%></div>
 								</div><%
-						
+
 								if(!admin){
-								
+
 									%><div class="col-lg-12 col-md-12 col-sm-3 col-xs-2"><%
-										
+
 										if (userId) {
 											%><div><a href="javascript:void(0);"><span class="fa fa-user"></span> <%=userName%> (<%=viewId%>)</a></div><%
 										}
 										else{
 											%><button class="btn btn-info" id="contacts-callback"><i class="glyphicon glyphicon-phone"></i><span>Заказать звонок</span></button><%
 										}
-										
+
 									%></div>
 									<div class="col-lg-12 col-md-12 col-sm-3 col-xs-2"></div><%
-									
+
 									if (userId) {
 										%><div class="col-lg-12 col-md-12 col-sm-3 col-xs-2">
 											<button class="btn btn-danger" id="user-logout-button"><i class="fa fa-sign-out"></i><span> Выход</span></button>
-											<button class="btn btn-primary" id="on-admin-mode-button"><i class="fa fa-gears"></i><span> Администрирование</span></button>
+											<button class="btn btn-primary" id="on-admin-mode-button"><i class="fa fa-gears"></i><span> Редактор</span></button>
+											<a href="/erp" class="btn btn-primary" id="on-admin-panel-button"><i class="fa fa-database"></i><span> ERP</span></a>
 										</div><%
 									}
-									
+
 								}
 								else{
 									%><div><a href="javascript:void(0);"><span class="fa fa-user"></span> <%=userName%> (<%=viewId%>)</a></div><%
@@ -97,11 +98,12 @@
 										<button class="btn btn-warning" id="leave-admin-mode-button"><i class="fa fa-close"></i><span> Завершить администрирование</span></button>
 									</div><%
 								}
-						
+
 						%></div>
 					</div>
 				</div>
 			</div>
+
 			<div class="container-fluid navbar-inverse" id="nav">
 				<div class="navbar-header">
 					<button type="button" data-target="#navbar" data-toggle="collapse" class="navbar-toggle">
@@ -112,9 +114,9 @@
 					</button>
 					<a href="/<% if(admin){ %>admin<% } %>" class="navbar-brand">Главная</a>
 				</div><%
-				
+
 				%><div id="navbar" class="collapse navbar-collapse"><%
-					
+
 					%><ul class="nav navbar-nav"><%
 						%><li <% if (route == "about") { %> class="active"<% } %>><a href="/about<% if(admin){ %>/admin<% } %>">О компании</a></li><%
 						%><li <% if (route == "catalog" || route == "position") { %> class="active"<% } %>><a href="/catalog<% if(admin){ %>/admin<% } %>">Инструмент</a></li><%
@@ -133,41 +135,41 @@
 						%><li><a href="/consult/admin">Консультирование &nbsp;</a></li><%
 					}
 					%></ul><%
-					
+
 				%></div><%
-			
+
 			%></div><%
 		%></header><%
-		
+
 		%><main id="main"><%
-		
+
 			if (!admin && consult) {
-		
+
 				%><div id="consult"><%
 					%><div id="consult-layout"></div><%
 					%><div id="consult-content"><%
-						
+
 						%><div id="consult-state" class="alert alert-success"><span class="fa fa-plus"></span> консультант в сети</div><%
-						
+
 						%><div id="consult-messages-wrapper"><%
 							%><ul id="consult-messages"><%
-								
+
 								if (consultMessages.length > 0) {
 									consultMessages.forEach(m => {
 										%><li class="message<% if (m.senderType !== 0) { %> answer<% } %>"><%
 											%><div><%
 												%><%=m.text%><%
 											%></div><%
-										%></li><%									
+										%></li><%
 									});
 								}
 								else{
 									%>Сообщения отсутствуют<%
 								}
-								
+
 							%></ul><%
 						%></div><%
-						
+
 						%><div id="consult-message-form"><%
 							%><div class="container-fluid"><%
 							%><div class="row"><%
@@ -181,10 +183,10 @@
 							%></div><%
 							%></div><%
 						%></div><%
-						
+
 					%></div><%
 				%></div><%
-				
+
 			}
-			
+
 			%><div class="container">

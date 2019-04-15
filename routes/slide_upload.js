@@ -6,7 +6,7 @@ module.exports = {
 
 	post:(req, res, next, data) => {
 
-		Log.view('Обработка POST-запроса контроллером ' + 'slide_upload'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'slide_upload'.grey);
 		
 		var slide = req.path_arr[1],
 			form = new multiparty.Form(),
@@ -29,7 +29,7 @@ module.exports = {
 		// обработчик завершения загрузки
 		form.on('close', function() {
 			
-			Log.view('Обработка завершения загрузки');
+			// Log.view('Обработка завершения загрузки');
 			
 			if(errors.length == 0) {
 				
@@ -51,7 +51,7 @@ module.exports = {
 			
 		form.on('part', function(part) {
 			
-			Log.view('Обработка потока загрузки файла');
+			// Log.view('Обработка потока загрузки файла');
 			
 			uploadFile.size = part.byteCount;
 			uploadFile.type = part.headers['content-type'];
@@ -71,7 +71,7 @@ module.exports = {
 
 			if (errors.length == 0) {
 				
-				Log.view('Ошибок нет. Выполняется запись файла');
+				// Log.view('Ошибок нет. Выполняется запись файла');
 				
 				var out = fs.createWriteStream(uploadFile.path);
 				part.pipe(out);

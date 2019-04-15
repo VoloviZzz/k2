@@ -40,7 +40,7 @@ module.exports = {
 						LIMIT 1
 					`;
 					
-					Log.data(q);
+					// Log.data(q);
 					
 					return Model.executeQuery(q);
 				})
@@ -60,7 +60,7 @@ module.exports = {
 	// запрос списка слайдов
 	get : arg => {
 
-		Log.view('Обращение к модели ' + 'slides.get'.grey);
+		// Log.view('Обращение к модели ' + 'slides.get'.grey);
 		
 		arg = arg || {};
 		
@@ -92,7 +92,7 @@ module.exports = {
 				${limit}
 			`;
 			
-			Log.data(q);
+			// Log.data(q);
 			
 			Model
 				.executeQuery(q)
@@ -131,7 +131,7 @@ module.exports = {
 							creator = ${arg.creator}
 					`;
 					
-					// Log.data(q);
+					// // Log.data(q);
 					
 					return Model.executeQuery(q);
 				})
@@ -150,7 +150,7 @@ module.exports = {
 	// удаление слайда
 	del : (arg) => {
 		
-		Log.view('Обращение к модели ' + 'slides.del'.grey);
+		// Log.view('Обращение к модели ' + 'slides.del'.grey);
 		
 		return new Promise((resolve, reject) => {
 		
@@ -166,7 +166,7 @@ module.exports = {
 						LIMIT 1
 					`;
 					
-					Log.data(q);
+					// Log.data(q);
 					
 					return Model.executeQuery(q);
 				})

@@ -3,7 +3,7 @@ module.exports = {
 	// обработка GET-запроса
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'consult'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'consult'.grey);
 		
 		if (!data.admin) next(new Error(404));
 		
@@ -16,7 +16,7 @@ module.exports = {
 			rooms.push(i);
 		}
 		
-		Log.view('Запрос списка сообщений активных комнат');
+		// Log.view('Запрос списка сообщений активных комнат');
 		
 		Model
 			.messages.get({rooms : rooms.join(',')})
@@ -24,13 +24,13 @@ module.exports = {
 				
 				data.messages = messages;
 				
-				Log.view('Рендеринг вида ' + 'consult'.grey);
+				// Log.view('Рендеринг вида ' + 'consult'.grey);
 				
 				console.log(data);
 				
 				res.render('consult', data);
 				
-				Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+				// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 				Log.delim();
 				
 			});
@@ -40,18 +40,18 @@ module.exports = {
 	// обработка POST-запроса
 	post : (req, res, next, data) => {
 		
-		Log.view('Обработка POST-запроса контроллером ' + 'consult'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'consult'.grey);
 		
 		switch (data.ctrl) {
 			
 			case 'newMessage' :
 				
-				Log.view('Обработка входящего сообщения консультанта');
+				// Log.view('Обработка входящего сообщения консультанта');
 				Model
 					.checkRequired(data, ['text', 'roomId'])
 					.then(() => {
 						
-						Log.view('Запись сообщения в базу данных');
+						// Log.view('Запись сообщения в базу данных');
 						
 						return Model
 							.messages.add({
@@ -64,8 +64,8 @@ module.exports = {
 					})
 					.then(messageId => {
 						
-						Log.view('Добавлено сообщение с идентификатором ' + ('#' + messageId).grey);
-						Log.view('Запрос добавленного сообщения');
+						// Log.view('Добавлено сообщение с идентификатором ' + ('#' + messageId).grey);
+						// Log.view('Запрос добавленного сообщения');
 						
 						return Model.messages.get({id : messageId});
 						
@@ -74,7 +74,7 @@ module.exports = {
 						
 						data.message = message;
 						
-						Log.view('Рассылка сообщения по видам получателя');
+						// Log.view('Рассылка сообщения по видам получателя');
 						
 						// console.log(Wss);
 						
@@ -96,7 +96,7 @@ module.exports = {
 					})
 					.then(message => {
 						
-						Log.view('Отправка ответа об успешном добавлении сообщения на клиент');
+						// Log.view('Отправка ответа об успешном добавлении сообщения на клиент');
 						
 						data.message = message;
 						res.send(JSON.stringify({status : 'ok', message : message}));
@@ -121,7 +121,7 @@ module.exports = {
 	// обработка WebSocket-запроса
 	ws : (ws, data) => {
 		
-		Log.view('Обработка WebSocket-запроса контроллером ' + 'consult'.grey);
+		// Log.view('Обработка WebSocket-запроса контроллером ' + 'consult'.grey);
 		
 		
 	}

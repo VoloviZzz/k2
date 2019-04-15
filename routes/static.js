@@ -10,27 +10,27 @@ module.exports = {
 	
 	post : (req, res, next, data) => {
 		
-		Log.view('Обработка POST-запроса контроллером ' + 'static'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'static'.grey);
 		
 		switch (data.ctrl) {
 			
 			case 'windowTemplate':
 				
-				Log.view('Обработка запроса шаблона всплывающего окна');
+				// Log.view('Обработка запроса шаблона всплывающего окна');
 				
 				res.render('window');
 				
 			break;
 			case 'callbackTemplate':
 				
-				Log.view('Обработка запроса шаблона формы обратного звонка');
+				// Log.view('Обработка запроса шаблона формы обратного звонка');
 				
 				res.render('callback');
 				
 			break;
 			case 'callback':
 				
-				Log.view('Обработка запроса заказа обратного звонка');
+				// Log.view('Обработка запроса заказа обратного звонка');
 				
 				Model
 					.checkRequired(data, ['name', 'number'])
@@ -69,7 +69,7 @@ module.exports = {
 			break;
 			case 'newMessage':
 			
-				Log.view('Обработка нового сообщения консультанта');
+				// Log.view('Обработка нового сообщения консультанта');
 
 				Model
 					.checkRequired(data, ['text'])
@@ -99,7 +99,7 @@ module.exports = {
 						
 						if (message == adminKeyWord) return adminKeyWord;
 						
-						Log.view('Отправка сообщения в виды консультантов');
+						// Log.view('Отправка сообщения в виды консультантов');
 						
 						Wss.clients.forEach(client => {
 							
@@ -109,7 +109,7 @@ module.exports = {
 								
 								client.send(JSON.stringify({action : 'newConsultMessage', message : message}));
 								
-								Log.view('Сообщение ' + message.text.grey + ' для комнаты ' + ('#' + message.roomId).grey + ' отправлено в просмотр ' + ('#' + client.viewId).grey);
+								// Log.view('Сообщение ' + message.text.grey + ' для комнаты ' + ('#' + message.roomId).grey + ' отправлено в просмотр ' + ('#' + client.viewId).grey);
 								
 							}
 							
@@ -122,20 +122,20 @@ module.exports = {
 					.then(message => {
 						if (message !== adminKeyWord) {
 							
-							Log.view('Отправка ответа об успешном добавлении сообщения');
+							// Log.view('Отправка ответа об успешном добавлении сообщения');
 							
 							res.send(JSON.stringify({status : 'ok', message : message}));
 							
 						}
 						else{
 							
-							Log.view('Запрос формы авторизации');
-							Log.view('Создание алиаса для формы авторизации');
+							// Log.view('Запрос формы авторизации');
+							// Log.view('Создание алиаса для формы авторизации');
 							
 							var md5 = require('md5'),
 								aliasName = md5(Math.random());
 								
-							Log.data(aliasName);
+							// Log.data(aliasName);
 							
 							Router.createAlias(aliasName, 'login');
 							
@@ -157,7 +157,7 @@ module.exports = {
 			break;
 			case 'logout':
 				
-				Log.view('Обработка сигнала выхода из учетной записи');
+				// Log.view('Обработка сигнала выхода из учетной записи');
 				
 				delete(req.session.userId);
 				
@@ -166,7 +166,7 @@ module.exports = {
 			break;
 			case 'saveMainText' :
 				
-				Log.view('Сохранение контента главной страницы');
+				// Log.view('Сохранение контента главной страницы');
 			
 				Model
 					.checkRequired(data, ['text'])
@@ -177,7 +177,7 @@ module.exports = {
 					})
 					.then(() => {
 						
-						Log.view('Обновление массива конфигурации');
+						// Log.view('Обновление массива конфигурации');
 						
 						return Model.config.getConfig();
 					
@@ -186,11 +186,11 @@ module.exports = {
 						
 						Config = result;
 						
-						Log.view('Массив конфигурации успешно обновлен');
+						// Log.view('Массив конфигурации успешно обновлен');
 						
 						res.send('complete');
 						
-						Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+						// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 						Log.delim();
 						
 					});
@@ -198,7 +198,7 @@ module.exports = {
 			break;
 			default:
 			
-				Log.view('Неизвестный контроллер ' + data.ctrl.grey);
+				// Log.view('Неизвестный контроллер ' + data.ctrl.grey);
 				
 				res.sendStatus(404);
 				
@@ -214,8 +214,8 @@ module.exports = {
 			
 			activate : (ws, data) => {
 				
-				Log.view('Действие: ' + 'activate'.grey + '. Выполнение активации токена', 3);
-				Log.data(JSON.stringify(data), 3);
+				// Log.view('Действие: ' + 'activate'.grey + '. Выполнение активации токена', 3);
+				// Log.data(JSON.stringify(data), 3);
 				
 				Model
 					.checkRequired(data, ['token'])	// проверяем наличие аргумента токен
@@ -223,7 +223,7 @@ module.exports = {
 						
 						if (typeof Views[data.token] !== 'undefined') {	// пробуем идентифицировать токен
 							
-							Log.view('Токен ' + ('#' + data.token).grey + ' успешно идентифицирован', 3);
+							// Log.view('Токен ' + ('#' + data.token).grey + ' успешно идентифицирован', 3);
 							
 							ws.viewId = data.token;	// присваиваем идентификатор токена объекту соединения
 							ws.roomId = Views[data.token].roomId;
@@ -243,7 +243,7 @@ module.exports = {
 						
 					})
 					.then(result => {
-						Log.view('Токен ' + ('#' + data.token).grey + ' успешно активирован', 3);
+						// Log.view('Токен ' + ('#' + data.token).grey + ' успешно активирован', 3);
 					})
 					.catch(error => {
 						Log.warn(error.toString());
@@ -252,14 +252,14 @@ module.exports = {
 			},
 			closeTab : (ws, data) => {
 				
-				Log.view('Действие: ' + 'closeTab'.grey + '. Обработка сигнала закрытия вкладки', 3);
+				// Log.view('Действие: ' + 'closeTab'.grey + '. Обработка сигнала закрытия вкладки', 3);
 				
 				var viewId = ws.viewId;
 				
 							
 				if (Views[viewId]) {
 					
-					Log.view('Рассылка сообщения о закрытии по консультантам');
+					// Log.view('Рассылка сообщения о закрытии по консультантам');
 					
 					Wss.clients.forEach(client => {
 					
@@ -270,7 +270,7 @@ module.exports = {
 							
 							client.send(JSON.stringify({action : 'closeTab', tab : tab}));
 							
-							Log.view('В просмотр ' + ('#' + client.viewId).grey + ' отправлено сообщение о закрытии вкладки ' + ('#' + viewId.grey));
+							// Log.view('В просмотр ' + ('#' + client.viewId).grey + ' отправлено сообщение о закрытии вкладки ' + ('#' + viewId.grey));
 							
 						}
 						
@@ -280,21 +280,21 @@ module.exports = {
 				
 				}
 				
-				Log.view('Закрыто соединение ' + ('#' + viewId).grey, 3);
+				// Log.view('Закрыто соединение ' + ('#' + viewId).grey, 3);
 				
 			},
 			test : (ws, data) => {
 				
-				Log.view('Действие: ' + 'test'.grey + '. Обработка сигнала test', 3);
+				// Log.view('Действие: ' + 'test'.grey + '. Обработка сигнала test', 3);
 				
 				ws.send(JSON.stringify({action : 'xx'}));
 				
-				Log.view('test', 3);
+				// Log.view('test', 3);
 			},
 			
 			newMessage : (ws, data) => {
 				
-				Log.view('Действие: ' + 'newMessage'.grey + '. Новое сообщение консультанта', 3);
+				// Log.view('Действие: ' + 'newMessage'.grey + '. Новое сообщение консультанта', 3);
 				
 				console.log(data.text);
 				console.log(ws.viewId);
@@ -309,8 +309,8 @@ module.exports = {
 			
 			showConsult : (ws, data) => {
 				
-				Log.view('Действие: ' + 'showConsult'.grey + '. Сигнал об открытии консультанта');
-				Log.view('Рассылка сигнала в остальные виды пользователя');
+				// Log.view('Действие: ' + 'showConsult'.grey + '. Сигнал об открытии консультанта');
+				// Log.view('Рассылка сигнала в остальные виды пользователя');
 				
 				Wss.clients.forEach(client => {
 					
@@ -319,7 +319,7 @@ module.exports = {
 						
 						client.send(JSON.stringify({action : 'showConsult'}));
 						
-						Log.view('Отправлено сообщение об открытии консультанта в вид ' + data.viewId.grey);
+						// Log.view('Отправлено сообщение об открытии консультанта в вид ' + data.viewId.grey);
 						
 					}
 					// разослать по консультантам
@@ -335,10 +335,10 @@ module.exports = {
 			
 			hideConsult : (ws, data) => {
 				
-				Log.view('Действие: ' + 'hideConsult'.grey + '. Сигнал о закрытии консультанта');
+				// Log.view('Действие: ' + 'hideConsult'.grey + '. Сигнал о закрытии консультанта');
 
 				
-				Log.view('Рассылка сигнала в остальные виды пользователя');
+				// Log.view('Рассылка сигнала в остальные виды пользователя');
 				
 				Wss.clients.forEach(client => {
 					
@@ -347,7 +347,7 @@ module.exports = {
 						
 						client.send(JSON.stringify({action : 'hideConsult'}));
 						
-						Log.view('Отправлено сообщение о закрытии консультанта в вид ' + data.viewId.grey);
+						// Log.view('Отправлено сообщение о закрытии консультанта в вид ' + data.viewId.grey);
 						
 					}
 					// разослать по консультантам
@@ -363,8 +363,8 @@ module.exports = {
 			
 		};
 		
-		Log.view('Обработка Websocket-запроса контроллером ' + 'static'.grey, 3);
-		Log.data(JSON.stringify(data), 3);
+		// Log.view('Обработка Websocket-запроса контроллером ' + 'static'.grey, 3);
+		// Log.data(JSON.stringify(data), 3);
 		
 		if (typeof actions[data.action] !== 'undefined') {
 			actions[data.action](ws, data);

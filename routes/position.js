@@ -3,14 +3,14 @@ var Files = require('../files.js');
 module.exports = {
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'position'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'position'.grey);
 		
 		var posId = req.path_arr[1];
 		if(typeof posId == 'undefined')res.render('404', {admin:false, title:'Страница не существует', url:req.url});
 		
 		data.title = 'Позиция';
 		
-		Log.view('Запрос позиции ' + ('#' + posId).grey);
+		// Log.view('Запрос позиции ' + ('#' + posId).grey);
 		
 		// запрос позиции
 		Model
@@ -26,7 +26,7 @@ module.exports = {
 				
 				}
 				
-				Log.view('Позиции с идентификатором ' + ('#' + posId).grey + ' найдена');
+				// Log.view('Позиции с идентификатором ' + ('#' + posId).grey + ' найдена');
 				
 				data.title = result.name;
 				data.pos = result;
@@ -68,11 +68,11 @@ module.exports = {
 			})
 			.then(() => {
 				
-				Log.view('Рендеринг вида ' + 'position'.grey);
+				// Log.view('Рендеринг вида ' + 'position'.grey);
 		
 				res.render('position', data);
 				
-				Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+				// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 				Log.delim();
 				
 			})

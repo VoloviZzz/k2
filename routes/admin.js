@@ -1,11 +1,11 @@
 module.exports = {
-	
+
 	post:(req, res, next, data) => {
-		
+
 		switch (data.ctrl) {
-			
+
 			case 'save_name' :
-			
+
 				Model
 					.checkRequired(data, ['name'])
 					.then(() => {
@@ -24,10 +24,10 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-			
+
 			break;
 			case 'saveBanner':
-			
+
 				Model
 					.checkRequired(data, ['text', 'link'])
 					.then(() => {
@@ -47,10 +47,10 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-			
+
 			break;
 			case 'save_slogan':
-				
+
 				Model
 					.checkRequired(data, ['name'])
 					.then(() => {
@@ -69,10 +69,10 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-			
+
 			break;
 			case 'save_bottom_description':
-			
+
 				Model
 					.checkRequired(data, ['text'])
 					.then(() => {
@@ -91,10 +91,10 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-			
+
 			break;
 			case 'save_region_code' :
-				
+
 				Model
 					.checkRequired(data, ['name'])
 					.then(() => {
@@ -113,10 +113,10 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			case 'save_phone_number' :
-				
+
 				Model
 					.checkRequired(data, ['name'])
 					.then(() => {
@@ -135,19 +135,19 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-					
+
 			break;
 			case 'saveSlideTitle' :
-			
-				Log.view('Сохранение заголовка слайда');
-		
+
+				// Log.view('Сохранение заголовка слайда');
+
 				Model
 					.checkRequired(data, ['id', 'title'])
 					.then(() => {
-						
+
 						console.log(1)
 						return Model.slides.set({id : data.id, title : data.title});
-						
+
 					})
 					.then(result => {
 						console.log(2)
@@ -157,13 +157,13 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
-				
+
+
 			break;
 			case 'saveSlideSubTitle' :
-		
-				Log.view('Сохранение подзаголовка слайда');
-		
+
+				// Log.view('Сохранение подзаголовка слайда');
+
 				Model
 					.checkRequired(data, ['id', 'subtitle'])
 					.then(() => {
@@ -175,12 +175,12 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			case 'saveSlideText' :
-		
-				Log.view('Сохранение текста слайда');
-		
+
+				// Log.view('Сохранение текста слайда');
+
 				Model
 					.checkRequired(data, ['id', 'text'])
 					.then(() => {
@@ -192,12 +192,12 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			case 'saveSlidePublic' :
-		
-				Log.view('Сохранение состояния публикации слайда');
-		
+
+				// Log.view('Сохранение состояния публикации слайда');
+
 				Model
 					.checkRequired(data, ['id', 'state'])
 					.then(() => {
@@ -209,12 +209,12 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			case 'saveSlidePriority' :
-		
-				Log.view('Сохранение значения приоритета слайда');
-		
+
+				// Log.view('Сохранение значения приоритета слайда');
+
 				Model
 					.checkRequired(data, ['id', 'priority'])
 					.then(() => {
@@ -226,12 +226,54 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
+			break;
+			case 'addNewSocialLink' :
+
+				// Log.view('addNewSocialLink');
+
+				Model
+					.social.add()
+					.then(array => {
+						res.send(String(array));
+					})
+					.catch(error => {
+						res.send(error.toString());
+					});
+
+			break;
+			case 'removeSocialLink' :
+
+				// Log.view('addNewSocialLink');
+
+				Model
+					.social.del({id: data.id})
+					.then(array => {
+						res.send(String(array));
+					})
+					.catch(error => {
+						res.send(error.toString());
+					});
+
+			break;
+			case 'editSocialLink' :
+
+				// Log.view('addNewSocialLink');
+
+				Model
+					.social.edit({id: data.id, link: data.link, fa: data.fa})
+					.then(array => {
+						res.send(String(array));
+					})
+					.catch(error => {
+						res.send(error.toString());
+					});
+
 			break;
 			case 'createNewSlide' :
-				
-				Log.view('Создание нового слайда');
-				
+
+				// Log.view('Создание нового слайда');
+
 				Model
 					.slides.add({creator : 1, sliderId : 1})
 					.then(slideId => {
@@ -240,12 +282,12 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			case 'deleteSlide' :
-				
-				Log.view('Удаление слайда');
-				
+
+				// Log.view('Удаление слайда');
+
 				Model
 					.checkRequired(data, ['id'])
 					.then(() => {
@@ -257,7 +299,7 @@ module.exports = {
 					.catch(error => {
 						res.send(error.toString());
 					});
-				
+
 			break;
 			default :
 				res.send(404);

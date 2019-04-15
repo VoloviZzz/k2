@@ -238,7 +238,7 @@ module.exports = {
 	
 	del : arg => {
 		
-		Log.view('Обращение к модели positions.del');
+		// Log.view('Обращение к модели positions.del');
 		
 		return new Promise((resolve, reject) => {
 		

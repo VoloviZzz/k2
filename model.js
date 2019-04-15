@@ -1,13 +1,13 @@
 module.exports = {
-	
+
 	// объект подключения, который обрабатывает запросы
 	db: null,
-	
+
 	// выполнение запроса с возвратом промиса, для последующего выстраивания цепочки
 	executeQuery: str => {
-		
-		// Log.view('Обращение к функции запроса ' + 'Model.executeQuery'.grey, 5);
-		
+
+		// // Log.view('Обращение к функции запроса ' + 'Model.executeQuery'.grey, 5);
+
 		return new Promise((resolve, reject) => {
 			Model
 				.db.query(str, (err, rows) => {
@@ -28,10 +28,10 @@ module.exports = {
 				});
 		});
 	},
-	
+
 	// функция проверки наличия обязательных параметров
 	checkRequired:(arg, required) => {
-		
+
 		return new Promise((resolve, reject) => {
 			required.forEach(param => {
 				if(!arg[param]){
@@ -39,13 +39,13 @@ module.exports = {
 					reject(new Error('Missing argument ' + param));
 				}
 			});
-			
+
 			resolve();
-			
+
 		});
-		
+
 	},
-	
+
 	// собственно модели
 	config : require('./models/config.js'),
 	positions : require('./models/positions.js'),
@@ -59,5 +59,6 @@ module.exports = {
 	routes : require('./models/routes.js'),
 	users : require('./models/users.js'),
 	slides : require('./models/slides.js'),
-	
+	social : require('./models/social.js'),
+
 };

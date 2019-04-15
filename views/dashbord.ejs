@@ -1,0 +1,54 @@
+<h2>Dashboard</h2>
+<div class="dashboard">
+  <div class="dashboard__item">
+    <div class="card">
+      <strong>41</strong> Номеров Телефонов
+    </div>
+  </div>
+  <div class="dashboard__item">
+    <div class="card">
+      <strong>8</strong> Заказов за сегодня
+    </div>
+  </div>
+  <div class="dashboard__item">
+    <div class="card">
+      Просмотров сайта за сегодня: <strong>80</strong>
+    </div>
+  </div>
+  <div class="dashboard__item">
+    <div class="card">
+      Просмотров сайта за всё время: <strong>390</strong>
+    </div>
+  </div>
+  <div class="dashboard__item dashboard__item--full">
+    <div class="card">
+      <% if(admin){
+      	%><div id="edit-rates" contenteditable="true" style="height:30em;"><%-Config.rates%></div><%
+      }
+      else{
+      	%><%-Config.rates !== null ? Config.rates : "Тарифы не заданы"%><%
+      } %>
+    </div>
+  </div>
+  <div class="dashboard__item dashboard__item--col">
+    <div class="card">
+      <div class="card_A">
+        <div class="about">
+          <h3>Динамика заказов</h3>
+          <p class="lead">За неделю</p>
+        </div>
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard__item dashboard__item--col">
+    <div class="card">B</div>
+  </div>
+  <div class="dashboard__item dashboard__item--col">
+    <div class="card">C</div>
+  </div>
+  <div class="dashboard__item dashboard__item--col">
+    <div class="card">D</div>
+  </div>
+</div>
+<script src="/public/javascripts/dashbord.js"></script>

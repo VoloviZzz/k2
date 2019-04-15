@@ -4,7 +4,7 @@ module.exports = {
 	// установка параметров маршрутов
 	set : arg => {
 		
-		Log.view('Обращение к модели ' + 'routes.set'.grey);
+		// Log.view('Обращение к модели ' + 'routes.set'.grey);
 
 		return new Promise((resolve, reject) => {
 			
@@ -42,7 +42,7 @@ module.exports = {
 						LIMIT 1
 					`;
 					
-					Log.data(q);
+					// Log.data(q);
 					
 					return Model.executeQuery(q);
 				})
@@ -62,7 +62,7 @@ module.exports = {
 	// выборка маршрутов
 	get : arg => {
 
-		Log.view('Обращение к модели ' + 'routes.get'.grey);
+		// Log.view('Обращение к модели ' + 'routes.get'.grey);
 		
 		arg = arg || {};
 		
@@ -84,7 +84,7 @@ module.exports = {
 				${limit}
 			`;
 			
-			// Log.data(q);
+			// // Log.data(q);
 			
 			Model
 				.executeQuery(q)
@@ -109,7 +109,7 @@ module.exports = {
 	// добавление маршрута
 	add : (arg) => {
 		
-		Log.view('Обращение к модели ' + 'routes.add'.grey);
+		// Log.view('Обращение к модели ' + 'routes.add'.grey);
 		
 		return new Promise((resolve, reject) => {
 		
@@ -127,7 +127,7 @@ module.exports = {
 							creator = ${arg.creator}
 					`;
 					
-					// Log.data(q);
+					// // Log.data(q);
 					
 					return Model.executeQuery(q);
 				})
@@ -146,7 +146,7 @@ module.exports = {
 	// удаление маршрутов
 	del : (arg) => {
 		
-		Log.view('Обращение к модели ' + 'routes.del'.grey);
+		// Log.view('Обращение к модели ' + 'routes.del'.grey);
 		
 		return new Promise((resolve, reject) => {
 
@@ -164,7 +164,7 @@ module.exports = {
 						LIMIT 1
 					`;
 					
-					Log.data(q);
+					// Log.data(q);
 					
 					return Model.executeQuery(q);
 				})

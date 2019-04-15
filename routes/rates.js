@@ -1,15 +1,15 @@
 module.exports = {
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'rates'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'rates'.grey);
 		
 		data.title = 'Тарифы';
 		
-		Log.view('Рендеринг вида ' + 'rates'.grey);
+		// Log.view('Рендеринг вида ' + 'rates'.grey);
 		
 		res.render('rates', data);
 		
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 	
 	},

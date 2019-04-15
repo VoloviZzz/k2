@@ -6,7 +6,7 @@ module.exports = {
 		
 		arg = arg || {};
 		
-		Log.view('Обращение к модели messages.get', 4);
+		// Log.view('Обращение к модели messages.get', 4);
 		
 		return new Promise((resolve, reject) => {
 			
@@ -37,7 +37,7 @@ module.exports = {
 				${limit}
 			`;
 			
-			// Log.data(q);
+			// // Log.data(q);
 			
 			Model
 				.executeQuery(q)
@@ -60,7 +60,7 @@ module.exports = {
 	// добавление визита
 	add : arg => {
 		
-		Log.view('Обращение к модели messages.add');
+		// Log.view('Обращение к модели messages.add');
 		
 		return new Promise((resolve, reject) => {
 		
@@ -80,7 +80,7 @@ module.exports = {
 						text = '${arg.text}'
 				`;
 				
-				// Log.data(q);
+				// // Log.data(q);
 			
 				return Model.executeQuery(q);
 			})

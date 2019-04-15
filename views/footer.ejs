@@ -1,16 +1,16 @@
 	</div><%
 	%></main><%
-	
+
 	if (userId) {
-		
+
 		%><div id="in-wrapper"><%
 			%><div id="in-container"><%
 				%><div id="in"><%
-				
+
 					%><div id="in-content-wrapper"><%
 						%><div id="in-content-container"><%
 							%><div id="in-content"><%
-								
+
 								%><div><%
 									%><div class="container-fluid"><%
 										%><div class="row"><%
@@ -21,7 +21,7 @@
 										%></div><%
 									%></div><%
 								%></div><%
-								
+
 								%><div><%
 									%><div class="container-fluid"><%
 										%><div class="row"><%
@@ -32,19 +32,19 @@
 										%></div><%
 									%></div><%
 								%></div><%
-								
+
 								%><div class="btn btn-lg btn-success"><span class="fa fa-sign-in"></span> Войти</div><%
-								
+
 							%></div><%
 						%></div><%
 					%></div><%
-					
+
 				%></div><%
 			%></div><%
 		%></div><%
-		
+
 	}
-	
+
 	%><footer id="footer" class="container-fluid navbar-inverse"><%
 		%><div class="row"><%
 			%><div id="description" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><%
@@ -52,30 +52,56 @@
 				%><div id="description-logo" class="col-lg-3 col-md-3 col-sm-2 col-xs-2"><%
 					%><div class="img" src="/public/images/logo.png"></div><%
 				%></div><%
-				
+
 				%><div id="description-text" class="col-lg-9 col-md-9 col-sm-10 col-xs-10"><%
-				
+
 					if(!admin){
 						%><p><%-Helpers.replaceLineBreaks(Config.bottom_description, "</p><p>")%></p><%
 					}
 					else{
 						%><textarea id="edit-company-bottom-description"><%=Config.bottom_description%></textarea><%
 					}
-			
+
 				%></div><%
 				%></div><%
-				
+
 			%></div><%
-			
+
 			%><div id="links" class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><%
 				%><h5>Мы в социальных медиа</h5><%
 				%><div id="links-social"><%
-					%><span class="fa fa-vk fa-2x"></span><%
-					%><span class="fa fa-odnoklassniki fa-2x"></span><%
-					%><span class="fa fa-google-plus fa-2x"></span><%
-					%><span class="fa fa-facebook fa-2x"></span><%
-					%><span class="fa fa-youtube fa-2x"></span><%
+					JSON.parse(Config.social).forEach(function (elem) {
+						// if (this.link && this.fa) {
+
+							if (admin) {
+							%><a data-id="<%=elem.id%>" class="open-setting"><span class="fa <%=elem.fa%> fa-2x"></span><%
+								%>
+								<div style="display:none" class="popup">
+									<input type="text" value="<%=elem.link%>">
+									<div data-icon="<%=elem.fa%>" class="btn btn-info select-icon" data-toggle="modal" data-target="#iconSelector">
+										<span class="fa <%=elem.fa%>"></span>
+									</div>
+									<div class="btn btn-danger remove-icon">
+										<span class="fa fa-remove"></span>
+									</div>
+								</div>
+								<%
+							}else {
+								%><a href="<%=elem.link%>" target="_blank"><span class="fa <%=elem.fa%> fa-2x"></span><%
+							}
+							%></a><%
+						// }
+					});
+				if (admin) {
+					%>
+					<span class="fa fa-plus fa-2x add-icon"></span>
+					<%
+				}
+
 				%></div>
+
+
+				<a href="#" target="_blank"></a>
 				<h5>Счетчики и рейтинги</h5>
 				<div id="links-counter">
 					<!--LiveInternet counter--><script type="text/javascript"><!--
@@ -94,8 +120,8 @@
 			<div id="contacts-bottom" class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 				<div class="number">
 					<span class="fa fa-phone">
-					</span> 
-					<b>+7</b> 
+					</span>
+					<b>+7</b>
 					<b>(<%=Config.phone_region_code%>)</b>
 					<b><%=Config.phone_number%></b>
 				</div>
@@ -113,8 +139,41 @@
 				Дизайн и программирование - <a href="http://letaindex.ru" target="_blank">Лаборатория ΛетаIndex</a>
 			</div>
 		</div>
-	</footer><%
-	
+	</footer>
+
+	<%
+	if(admin){
+		%>
+		<div class="modal fade" id="iconSelector" tabindex="-1" role="dialog" aria-labelledby="iconSelectorTitle" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="iconSelectorTitle">Иконки</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					<%
+					Icons.forEach(elem => {
+						%><div data-icon="<%=elem.name%>" class="icon block set-icon" data-dismiss="modal">
+							<span class="fa <%=elem.name%> fa-4x"></span>
+						</div><%
+					});
+					%>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%
+	}
+	%>
+
+	<%
+
 	%><script src="/public/vendors/jquery/dist/jquery.js"></script><%
 	%><script src="/public/vendors/jquery.cookie/jquery.cookie.js"></script><%
 	%><script src="/public/vendors/bootstrap/dist/js/bootstrap.js"></script><%
@@ -122,11 +181,11 @@
 	%><script>Config.WSToken = '<%=viewId%>';</script><%
 	%><script src="/public/javascripts/main.js"></script><%
 	%><script src="/public/javascripts/ws.js"></script><%
-	
+
 	if (userId) {
-	
+
 		%><script src="/public/javascripts/user.js"></script><%
-	
+
 		if(admin){
 			%><script src="/public/vendors/tinymce/tinymce.js"></script><%
 			%><script src="/public/javascripts/admin.js"></script><%
@@ -138,6 +197,6 @@
 			%><script src="/public/javascripts/consult.js"></script><%
 		}
 	}
-	
+
   %></body>
 </html>

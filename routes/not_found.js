@@ -5,15 +5,15 @@ module.exports = {
 	// обработка GET-запроса
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'not_found'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'not_found'.grey);
 		
 		data.title = 'Страница не существет';
 		
-		Log.view('Рендеринг вида ' + 'not_found'.grey);
+		// Log.view('Рендеринг вида ' + 'not_found'.grey);
 		
 		res.render('not_found', data);
 		
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 		
 	},
@@ -21,7 +21,7 @@ module.exports = {
 	// обработка POST-запроса
 	post:(req, res, next, data) => {
 
-		Log.view('Обработка POST-запроса контроллером ' + 'not_found'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'not_found'.grey);
 		
 		switch(data.ctrl){
 			
@@ -51,7 +51,7 @@ module.exports = {
 	// обработка WebSocket-запроса
 	ws : (ws, data) => {
 		
-		Log.view('Обработка WebSocket-запроса контроллером ' + 'not_found'.grey);
+		// Log.view('Обработка WebSocket-запроса контроллером ' + 'not_found'.grey);
 		
 	}
 	

@@ -1,15 +1,15 @@
 module.exports = {
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + 'contacts'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + 'contacts'.grey);
 		
 		data.title = 'Контакты';
 		
-		Log.view('Рендеринг вида ' + 'contacts'.grey);
+		// Log.view('Рендеринг вида ' + 'contacts'.grey);
 		
 		res.render('contacts', data);
 		
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 	
 	},

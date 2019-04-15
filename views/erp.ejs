@@ -1,0 +1,92 @@
+<!DOCTYPE html><%
+%><html><%
+	%><head><%
+		%><title><%=title%></title><%
+
+		%><link rel="SHORTCUT ICON" href="/public/favicon.ico" type="image/x-icon" /><%
+
+		%><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><%
+
+		%><link rel="stylesheet" href="/public/vendors/bootstrap/dist/css/bootstrap.css" /><%
+		%><link rel="stylesheet" href="/public/vendors/bootstrap/dist/css/bootstrap-theme.css" /><%
+		%><link rel="stylesheet" href="/public/vendors/font-awesome/css/font-awesome.css" /><%
+		%><link rel="stylesheet" href="/public/stylesheets/main.css" /><%
+		%><link rel="stylesheet" href="/public/stylesheets/static.css" /><%
+    %><link rel="stylesheet" href="/public/stylesheets/admin_panel.css" /><%
+    %><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script><%
+
+		if (admin) {
+			%><link rel="stylesheet" href="/public/stylesheets/admin.css" /><%
+		}
+
+	%></head><%
+
+	%><body id="body">
+
+  <div class="admin">
+  <header class="admin__header">
+    <a href="#" class="logo">
+      <h1>ERP</h1>
+    </a>
+    <div class="toolbar">
+      <div class="btns">
+        <div class="btn btn--primary selected">prokat-k2</div>
+        <div class="btn btn--primary">prokat-mgn</div>
+      </div>
+      <a href="/" class="logout">
+        На главную
+      </a>
+    </div>
+  </header>
+  <nav class="admin__nav">
+    <ul class="menu">
+      <li class="menu__item">
+        <a class="menu__link" href="#">Приборная Доска</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Товары</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Заказы</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Товары</a>
+      </li>
+    </ul>
+  </nav>
+  <main class="admin__main">
+    <%- include("dashbord") -%>
+
+  </main>
+
+</div>
+
+
+
+
+<%
+%><script src="/public/vendors/jquery/dist/jquery.js"></script><%
+%><script src="/public/vendors/jquery.cookie/jquery.cookie.js"></script><%
+
+%><script src="/public/vendors/bootstrap/dist/js/bootstrap.js"></script><%
+%><script src="/public/javascripts/config.js"></script><%
+%><script>Config.WSToken = '<%=viewId%>';</script><%
+%><script src="/public/javascripts/main.js"></script><%
+%><script src="/public/javascripts/ws.js"></script><%
+
+if (userId) {
+
+  %><script src="/public/javascripts/user.js"></script><%
+
+  if(admin){
+    %><script src="/public/vendors/tinymce/tinymce.js"></script><%
+    %><script src="/public/javascripts/admin.js"></script><%
+  }
+
+}
+else{
+  if (consult) {
+    %><script src="/public/javascripts/consult.js"></script><%
+  }
+}
+%>

@@ -2,7 +2,7 @@ var db = require('mysql'),
 	config = require('./config.js'),
 	Log = require('./log.js');
 
-Log.view('Выполняется попытка подключения к MySQL');
+// Log.view('Выполняется попытка подключения к MySQL');
 var db = db.createConnection(config.db);
 
 db.connect(function(err){
@@ -11,7 +11,7 @@ db.connect(function(err){
 		return;
 	}
  
-	Log.view('Установлено подключение к MySQL с идентификатором ' + ('#' + db.threadId).grey);
+	// Log.view('Установлено подключение к MySQL с идентификатором ' + ('#' + db.threadId).grey);
 });
 
 module.exports = db;

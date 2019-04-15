@@ -49,7 +49,7 @@ module.exports = {
 	// запрос списка подключений
 	get : arg => {
 
-		Log.view('Обращение к модели ' + 'users.get'.grey);
+		// Log.view('Обращение к модели ' + 'users.get'.grey);
 		
 		arg = arg || {};
 		
@@ -83,7 +83,7 @@ module.exports = {
 				${limit}
 			`;
 			
-			// Log.data(q);
+			// // Log.data(q);
 			
 			Model
 				.executeQuery(q)

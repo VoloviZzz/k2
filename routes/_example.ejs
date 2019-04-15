@@ -3,11 +3,11 @@ module.exports = {
 	// обработка GET-запроса
 	get:(req, res, next, data) => {
 		
-		Log.view('Обработка GET-запроса контроллером ' + '<%=name%>'.grey);
+		// Log.view('Обработка GET-запроса контроллером ' + '<%=name%>'.grey);
 				
 		res.render('<%=name%>', data);
 				
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 			
 	},
@@ -15,12 +15,12 @@ module.exports = {
 	// обработка POST-запроса
 	post : (req, res, next, data) => {
 		
-		Log.view('Обработка POST-запроса контроллером ' + 'consult'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'consult'.grey);
 		
 		switch (data.ctrl) {
 			case 'action_sample' :
 				
-				Log.view('Обработка тестового запроса');
+				// Log.view('Обработка тестового запроса');
 				
 				res.send(JSON.stringify({status : 'ok', message : 'test'}));
 				
@@ -31,7 +31,7 @@ module.exports = {
 			
 		}
 
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 		
 	},
@@ -39,9 +39,9 @@ module.exports = {
 	// обработка WebSocket-запроса
 	ws : (ws, data) => {
 		
-		Log.view('Обработка WebSocket-запроса контроллером ' + 'consult'.grey);
+		// Log.view('Обработка WebSocket-запроса контроллером ' + 'consult'.grey);
 		
-		Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
+		// Log.view('---> ---> --->'.green + ' Обработка запроса завершена');
 		Log.delim();
 		
 	}

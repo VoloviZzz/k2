@@ -7,7 +7,7 @@ module.exports = {
 
 	post:(req, res, next, data) => {
 
-		Log.view('Обработка POST-запроса контроллером ' + 'position_upload'.grey);
+		// Log.view('Обработка POST-запроса контроллером ' + 'position_upload'.grey);
 	
 		var pos = req.path_arr[1],
 			form = new multiparty.Form(),

@@ -15,7 +15,7 @@ var
 	config = require('./config.js'),
 	db = require('./connect.js');
 
-Log.view('Сборка приложения');
+// Log.view('Сборка приложения');
 
 Model = require('./model.js');
 Model.db = db;
@@ -26,7 +26,7 @@ Router = require('./router.js');
 Routes = {};
 
 Wss = require('./ws.js');
-	
+
 var app = express();
 
 // view engine setup
@@ -49,82 +49,93 @@ app.use(cookieSession({
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/public/vendors', express.static(path.join(__dirname, 'bower_components')));
 
-Log.view('Запрос конфигурации системы');
+// Log.view('Запрос конфигурации системы');
 
 Config = false;
+Icons = false;
 Users = {};
 Visitors = {};
 Visits = {};
 Views = {};
 Rooms = {};
 
-Log.view('Запрос параметров конфигурации');
+// Log.view('Запрос параметров конфигурации');
 
 Model
 	.config.getConfig()
 	.then(result => {
-		
-		Log.view('Параметры конфигурации получены');
-		
+
+		// Log.view('Параметры конфигурации получены');
+
 		Config = result;
-		
+
 	})
 	.then(() => {
-		
-		Log.view('Запрос списка пользователей');
-		
+
+		// Log.view('Запрос списка иконок');
+
+		return Model.social.getIcons();
+	})
+	.then(res => {
+		Icons = res;
+		console.log(Icons);
+	})
+	.then(() => {
+
+		// Log.view('Запрос списка пользователей');
+
 		return Model.users.get();
-		
+
 	})
 	.then(result => {
-		
-		Log.view('Список пользователей получен');
-		
+
+		// Log.view('Список пользователей получен');
+
 		result.forEach(u => {
 			Users[u.id] = u;
 		});
-		
+
 	})
 	.then(() => {
-		
-		Log.view('Запрос списка маршрутов');
-		
+
+		// Log.view('Запрос списка маршрутов');
+
 		return Model.routes.get();
-		
+
 	})
 	.then(result => {
-		
-		Log.view('Список маршрутов получен');
-		
+
+		// Log.view('Список маршрутов получен');
+
 		result.forEach(r => {
-			
+
 			if (r.aliasfor == null) r.ctrl = require('./routes/' + r.ctrl);
-			
+
 			Routes[r.name] = r;
-			
+
 		});
-		
+
 		// console.log(Routes)
-		
+
 	})
 	.then(() => {	//обработка маршрута
-		
-		Log.view('Инициализация модуля маршрутизации');
-		
+
+		// Log.view('Инициализация модуля маршрутизации');
+
 		app.use((req, res, next) => {
-		
-			Log.view('<--- <--- <--- '.green + 'Получен HTTP-запрос');
-		
+
+			// Log.view('<--- <--- <--- '.green + 'Получен HTTP-запрос');
+
 			Router.http(req, res, next);
-		
+
 		});
 
 		// catch 404 and forward to error handler
 		app.use(function(req, res, next) {
-			
+
 			res.status(404);
 			res.render('404', {admin:false, title:'Страница не существует', url:req.url});
-			
+
 		});
 
 		// development error handler - will print stacktrace
@@ -156,7 +167,7 @@ Model
 		});
 
 		app.listen(config.HTTPPort, () => {
-			Log.view('Запущено прослушивание порта ' + ('#' +config.HTTPPort).grey);
+			// Log.view('Запущено прослушивание порта ' + ('#' +config.HTTPPort).grey);
 			console.log('Сервер успешно запущен');
 		});
 	})

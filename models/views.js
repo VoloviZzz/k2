@@ -6,7 +6,7 @@ module.exports = {
 		
 		return new Promise((resolve, reject) => {
 			
-			Log.view('Обращение к модели ' + 'views.set'.grey);
+			// Log.view('Обращение к модели ' + 'views.set'.grey);
 		
 			Model
 				.checkRequired(arg, ['id'])
@@ -27,7 +27,7 @@ module.exports = {
 						WHERE id = ${arg.id}
 					`;
 					
-					// Log.data(q);
+					// // Log.data(q);
 					
 					Model
 						.executeQuery(q)
@@ -68,7 +68,7 @@ module.exports = {
 	// добавление просмотра
 	add : arg => {
 		
-		Log.view('Обращение к модели ' + 'views.add'.grey);
+		// Log.view('Обращение к модели ' + 'views.add'.grey);
 		
 		return new Promise((resolve, reject) => {
 			
@@ -84,12 +84,12 @@ module.exports = {
 						visitor_id = ${arg.visitorId}
 				`;
 				
-				// Log.data(q)
+				// // Log.data(q)
 				return Model.executeQuery(q);
 			
 			})
 			.then(result => {
-				Log.view('Создана запись с идентификатором ' + ('#' + result).grey)
+				// Log.view('Создана запись с идентификатором ' + ('#' + result).grey)
 				resolve(result);
 			})
 			.catch(error => {
